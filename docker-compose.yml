@@ -1,0 +1,41 @@
+services:
+  coffee-advisor-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    # Nama container yang mudah diingat
+    container_name: coffee-advisor-api
+
+    # Port mapping: host:container
+    # Akses via: http://localhost:8000
+    ports:
+      - "8000:8000"
+
+    # Load semua env dari file .env
+    # Team member tinggal copy .env.example → .env dan isi API key
+    env_file:
+      - .env
+
+    # Override env individual (opsional, prioritas lebih tinggi dari .env)
+    environment:
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}  
+      - PYTHONUNBUFFERED=1
+
+    # Auto restart kecuali di-stop manual
+    restart: unless-stopped
+
+    # Healthcheck — compose akan tunggu healthy sebelum depend_on service lain
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import httpx; httpx.get('http://localhost:8000/api/v1/health').raise_for_status()"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+    # Volume untuk hot reload saat development
+    # Comment out bagian ini untuk production build
+    volumes:
+      - ./app:/app/app
+
