@@ -1,3 +1,40 @@
+# Caffeinance: Platform Visualisasi Data Terotomasi dan AI Chatbot Advisor untuk UMKM Coffee Shop
+## Deskripsi Proyek
+Platform fintech yang dirancang khusus untuk UMKM coffee shop guna mengatasi masalah "Financial Blindspot" melalui:
+- Otomatisasi proses data dari spreadsheet Excel menjadi dashboard visual komprehensif
+- Prediksi arus kas menggunakan model Time-Series Forecasting (14-30 hari ke depan)
+- AI Chatbot Advisor yang memberikan peringatan dini dan saran mitigasi krisis likuiditas
+## Tim Proyek
+| Nama | NIM | Peran | Status |
+|------|-----|-------|--------|
+| Muhammad Fathir Ramada | CFCC367D6Y2269 | Full-Stack Web | Aktif |
+| Mohamad Rafly Andreanto | CACC964D6Y2603 | AI Engineer | Aktif |
+| Nashwa Faiza Shakila | CACC277D6X1733 | AI Engineer | Aktif |
+| Bintang Gilangkasa Syailendra | CDCC902D6Y1685 | Data Scientist | Aktif |
+| Muhammad Jalaluddin mahfuhdo | CDCC944D6Y1131 | Data Scientist | Aktif |
+| Dias Putra Kurnia Sandi | CFCC218D6Y0646 | Full-Stack Web | Aktif |
+## Teknologi yang Digunakan
+- **Frontend**: React dengan Vite
+- **Backend**: Node.js dengan Express.js (RESTful API)
+- **AI/ML**: TensorFlow (Functional API atau Model Subclassing untuk model kustom)
+- **Data Processing**: Python untuk pembersihan dan transformasi data
+- **Lainnya**: FastAPI/Flask untuk serving model AI
+## Fitur Utama
+Berdasarkan cakupan proyek:
+1. **Domain Data Scientist**
+   - Otomatisasi pembacaan, pembersihan, dan formatting data Excel
+   - Analisis pola transaksi (tren keramaian, deteksi anomali pengeluaran)
+   - Pembentukan metrik bisnis dan visualisasi dashboard
+2. **Domain AI Engineer**
+   - Model Prediksi Arus Kas (Time-Series Forecasting)
+   - AI Chatbot Advisor untuk saran mitigasi keuangan
+3. **Domain Full-Stack Web**
+   - Autentikasi Pengguna
+   - Input Rencana Anggaran
+   - Input Transaksi Harian
+   - Smart Dashboard dengan indikator Traffic Light
+
+
 # ☕ Coffee Advisor API
 
 AI Financial Advisor untuk owner Coffee Shop Gen Z.
@@ -9,7 +46,6 @@ Powered by **OpenRouter API** (model gratis) + **FastAPI** + **Docker**.
 
 ### Prasyarat
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) sudah terinstall
-- API key dari [OpenRouter](https://openrouter.ai/) (gratis)
 
 ### Langkah-langkah
 
@@ -21,15 +57,12 @@ cd coffee-advisor-api
 # 2. Setup environment
 cp .env.example .env
 
-# 3. Edit .env — isi OPENROUTER_API_KEY dengan key lo
-# Daftar gratis di: https://openrouter.ai/keys
-nano .env   # atau pakai text editor apapun
+nano .env   
 
 # 4. Jalankan!
 docker compose up --build
 
-# Server berjalan di: http://localhost:8000
-# Dokumentasi API: http://localhost:8000/docs
+
 ```
 
 ### Stop server
@@ -134,17 +167,12 @@ AI Advisor reply 💬
 
 ## 🤖 Model OpenRouter yang Dipakai
 
-Default: `deepseek/deepseek-chat-v3-0324:free`
+Default: `openai/gpt-oss-120b:free`
 
 Ganti model di `.env`:
 ```env
-OPENROUTER_MODEL=meta-llama/llama-3.3-70b-instruct:free
+OPENROUTER_MODEL=openai/gpt-oss-120b:free
 ```
-
-Model gratis lain yang bisa dipakai:
-- `qwen/qwen3-8b:free`
-- `mistralai/mistral-7b-instruct:free`
-- `meta-llama/llama-3.3-70b-instruct:free`
 
 Cek semua model gratis di: https://openrouter.ai/models?q=:free
 
@@ -173,24 +201,4 @@ coffee-advisor-api/
 
 ---
 
-## 🛠️ Development Tanpa Docker
 
-```bash
-# Setup venv
-python3 -m venv venv
-source venv/bin/activate          # Linux/Mac
-venv\Scripts\activate             # Windows
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Setup env
-cp .env.example .env
-# Edit .env dan isi OPENROUTER_API_KEY
-
-# Jalankan server
-uvicorn app.main:app --reload --port 8000
-
-# Buka dokumentasi
-# http://localhost:8000/docs
-```

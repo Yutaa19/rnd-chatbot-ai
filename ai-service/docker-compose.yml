@@ -5,15 +5,11 @@ services:
       dockerfile: Dockerfile
 
     # Nama container yang mudah diingat
-    container_name: coffee-advisor-api
+    container_name: coffebot
 
-    # Port mapping: host:container
-    # Akses via: http://localhost:8000
     ports:
       - "8000:8000"
 
-    # Load semua env dari file .env
-    # Team member tinggal copy .env.example → .env dan isi API key
     env_file:
       - .env
 
@@ -34,8 +30,6 @@ services:
       retries: 3
       start_period: 10s
 
-    # Volume untuk hot reload saat development
-    # Comment out bagian ini untuk production build
     volumes:
       - ./app:/app/app
 
