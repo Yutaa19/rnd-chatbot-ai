@@ -1,6 +1,12 @@
 from pydantic import BaseModel, Field, field_validator
 from typing import Optional
 import datetime
+from typing import Optional, List
+
+class PredictionItem(BaseModel):
+    hari_ke: int
+    prediksi_cashflow: float
+    prediksi_cashflow_format: str
 
 class BusinessSettings(BaseModel):
     fixed_cost_monthly: int = Field(
@@ -54,6 +60,7 @@ class MLPredictionContext(BaseModel):
     cashflow_status: str = Field(default="Normal", description="Defisit / Impas / Surplus_tipis / Surplus_sehat")
     warning: Optional[str] = Field(default=None, description="Warning dari sitem jika kondisi kritis")
     recommendation: Optional[str] = Field(default=None, description="Rekomendasi otomatis dari sistem")
+    predictions: Optional[List[PredictionItem]] = Field(default=None)
 
 class ChatRequest(BaseModel):
     message: str = Field(..., description="Pesan input dari user untuk chatbot")
